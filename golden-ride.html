@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Golden Ride — Automotive Protection & Enhancement, Dubai</title>
+<meta name="description" content="Golden Ride is a premium automotive protection and enhancement studio in Umm Ramool, Dubai — PPF, ceramic coating, polishing, detailing, tinting and decals.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --platinum:#F1F0ED;
+    --silver:#DFDFDF;
+    --charcoal:#151515;
+    --graphite:#252525;
+    --gold:#B59655;
+    --gold-hi:#C9AD70;
+    --ink:#111111;
+    --slate:#747474;
+    --line:#D2D0CB;
+    --line-dark:rgba(197,177,131,0.22);
+    --serif:'Bodoni Moda', 'Times New Roman', serif;
+    --sans:'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+  body{
+    font-family:var(--sans);
+    background:var(--platinum);
+    color:var(--ink);
+    line-height:1.5;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;background:none;border:none;cursor:pointer;color:inherit;}
+  .wrap{max-width:1400px;margin:0 auto;padding:0 6vw;}
+
+  ::selection{background:var(--gold); color:var(--charcoal);}
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:4px;
+  }
+
+  /* ---------- fine line + label utilities ---------- */
+  .hairline{height:1px;background:var(--line);}
+  .hairline.on-dark{background:var(--line-dark);}
+  .gold-rule{width:52px;height:1px;background:var(--gold);display:block;}
+  .meta-line{
+    font-size:0.72rem;
+    letter-spacing:0.22em;
+    color:var(--slate);
+    font-weight:500;
+  }
+  .meta-line.on-dark{color:#9c9a95;}
+
+  /* ================= NAV ================= */
+  .nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:26px 6vw;
+    transition:background .5s ease, padding .5s ease, box-shadow .5s ease;
+  }
+  .nav.scrolled{
+    background:rgba(21,21,21,0.92);
+    -webkit-backdrop-filter:blur(10px);
+    backdrop-filter:blur(10px);
+    padding:16px 6vw;
+    box-shadow:0 1px 0 var(--line-dark);
+  }
+  .nav-logo{
+    font-family:var(--serif);
+    font-weight:500;
+    font-size:1.15rem;
+    letter-spacing:0.06em;
+    color:var(--ink);
+    transition:color .5s ease;
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+  }
+  .nav-logo small{
+    font-family:var(--sans);
+    font-size:0.58rem;
+    letter-spacing:0.24em;
+    color:var(--gold);
+    font-weight:600;
+  }
+  .nav.scrolled .nav-logo{color:#F1F0ED;}
+  .nav-links{
+    display:flex; align-items:center; gap:44px;
+    list-style:none;
+  }
+  .nav-links a{
+    font-size:0.82rem;
+    letter-spacing:0.04em;
+    color:var(--ink);
+    position:relative;
+    padding-bottom:4px;
+    transition:color .5s ease;
+  }
+  .nav.scrolled .nav-links a{color:#e9e7e2;}
+  .nav-links a::after{
+    content:'';
+    position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:var(--gold);
+    transition:width .35s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    font-weight:600;
+    padding:11px 22px;
+    border:1px solid var(--ink);
+    color:var(--ink);
+    transition:all .5s ease;
+    white-space:nowrap;
+  }
+  .nav.scrolled .nav-cta{border-color:var(--gold-hi); color:#F1F0ED;}
+  .nav-cta:hover{background:var(--ink); color:var(--platinum);}
+  .nav.scrolled .nav-cta:hover{background:var(--gold); border-color:var(--gold); color:var(--charcoal);}
+  .nav-burger{display:none;}
+
+  @media(max-width:900px){
+    .nav-links{
+      position:fixed; inset:0 0 0 auto; width:min(78vw,340px);
+      background:var(--charcoal); flex-direction:column; align-items:flex-start;
+      justify-content:center; gap:34px; padding:0 44px;
+      transform:translateX(100%); transition:transform .5s ease;
+    }
+    .nav-links.open{transform:translateX(0);}
+    .nav-links a{color:#F1F0ED; font-size:1rem;}
+    .nav-cta{display:none;}
+    .nav-burger{
+      display:flex; flex-direction:column; gap:5px; z-index:101; padding:6px;
+    }
+    .nav-burger span{
+      width:22px; height:1px; background:var(--ink); transition:all .4s ease;
+    }
+    .nav.scrolled .nav-burger span{background:#F1F0ED;}
+    .nav-burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg); background:#F1F0ED;}
+    .nav-burger.open span:nth-child(2){opacity:0;}
+    .nav-burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg); background:#F1F0ED;}
+  }
+
+  /* ================= REVEAL ================= */
+  .reveal{opacity:0; transform:translateY(26px); transition:opacity .9s ease, transform .9s ease;}
+  .reveal.in{opacity:1; transform:none;}
+  .reveal.d1{transition-delay:.1s;}
+  .reveal.d2{transition-delay:.22s;}
+  .reveal.d3{transition-delay:.34s;}
+
+  /* ================= HERO ================= */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    background:var(--platinum);
+    display:grid;
+    grid-template-columns:1.08fr 0.92fr;
+    align-items:stretch;
+    padding-top:110px;
+  }
+  .hero-left{
+    padding:0 6vw 70px;
+    display:flex; flex-direction:column; justify-content:center;
+    position:relative; z-index:2;
+  }
+  .hero-eyebrow{
+    display:flex; align-items:center; gap:14px; margin-bottom:34px;
+  }
+  .hero-title{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(2.6rem, 5.6vw, 4.7rem);
+    line-height:1.02;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  .hero-title em{font-style:italic; font-weight:500; color:var(--gold);}
+  .hero-sub{
+    max-width:420px;
+    margin-top:30px;
+    font-size:1rem;
+    color:var(--slate);
+    line-height:1.7;
+  }
+  .hero-services{
+    margin-top:46px;
+    font-size:0.75rem;
+    letter-spacing:0.16em;
+    color:var(--ink);
+    font-weight:600;
+  }
+  .hero-services span.sep{color:var(--gold); margin:0 10px; font-weight:400;}
+  .hero-location{
+    margin-top:14px;
+    font-size:0.72rem;
+    letter-spacing:0.16em;
+    color:var(--slate);
+  }
+  .hero-ctas{
+    margin-top:52px;
+    display:flex; align-items:center; gap:32px; flex-wrap:wrap;
+  }
+  .btn-primary{
+    padding:16px 34px;
+    background:var(--ink);
+    color:var(--platinum);
+    font-size:0.76rem;
+    letter-spacing:0.14em;
+    font-weight:600;
+    transition:background .35s ease, transform .35s ease;
+  }
+  .btn-primary:hover{background:var(--gold); color:var(--charcoal);}
+  .btn-text{
+    font-size:0.76rem;
+    letter-spacing:0.14em;
+    font-weight:600;
+    border-bottom:1px solid var(--ink);
+    padding-bottom:5px;
+    transition:border-color .35s ease, color .35s ease;
+  }
+  .btn-text:hover{border-color:var(--gold); color:var(--gold);}
+
+  .hero-right{
+    position:relative;
+    overflow:hidden;
+    background:
+      radial-gradient(120% 140% at 78% 18%, rgba(197,173,112,0.16), transparent 55%),
+      linear-gradient(155deg, #dedcd6 0%, #eceae5 38%, #d7d5cf 62%, #201f1d 130%);
+  }
+  .hero-car{
+    position:absolute; inset:0;
+    display:flex; align-items:flex-end; justify-content:center;
+    padding-bottom:8%;
+  }
+  .hero-car svg{width:88%; max-width:640px; opacity:0.94;}
+  .hero-right::after{
+    content:'';
+    position:absolute; left:0; right:0; bottom:0; height:38%;
+    background:linear-gradient(to top, rgba(21,21,21,0.28), transparent);
+  }
+  .hero-frame-label{
+    position:absolute; top:36px; right:36px;
+    text-align:right; z-index:2;
+  }
+  .hero-scroll{
+    position:absolute; bottom:34px; left:6vw;
+    display:flex; align-items:center; gap:12px;
+    z-index:2;
+  }
+  .hero-scroll .stem{
+    width:1px; height:46px; background:var(--ink);
+    position:relative; overflow:hidden;
+  }
+  .hero-scroll .stem::after{
+    content:''; position:absolute; left:0; top:-100%; width:100%; height:100%;
+    background:var(--gold);
+    animation:scrollDrip 2.4s ease-in-out infinite;
+  }
+  @keyframes scrollDrip{ to{ top:100%; } }
+  .hero-scroll span{font-size:0.68rem; letter-spacing:0.2em; color:var(--slate);}
+
+  @media(max-width:900px){
+    .hero{grid-template-columns:1fr; padding-top:96px;}
+    .hero-right{height:46vh; order:-1;}
+    .hero-left{padding:44px 7vw 60px;}
+    .hero-scroll{display:none;}
+    .hero-frame-label{display:none;}
+  }
+
+  /* ================= SERVICES (dark) ================= */
+  .services{
+    background:var(--charcoal);
+    color:#EDEBE6;
+    padding:150px 0 120px;
+    position:relative;
+  }
+  .services-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    margin-bottom:80px; gap:40px; flex-wrap:wrap;
+  }
+  .services-head h2{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(2rem, 4vw, 3.1rem);
+    max-width:560px;
+    line-height:1.12;
+  }
+  .services-head p{
+    max-width:300px; color:#9c9a95; font-size:0.92rem; line-height:1.7;
+  }
+
+  .service-list{ border-top:1px solid var(--line-dark); }
+  .service-row{
+    border-bottom:1px solid var(--line-dark);
+    padding:34px 0;
+    display:grid;
+    grid-template-columns:70px 1fr auto;
+    align-items:center;
+    gap:24px;
+    cursor:pointer;
+    position:relative;
+  }
+  .service-row .num{
+    font-family:var(--serif);
+    font-size:1rem;
+    color:var(--gold-hi);
+    font-weight:500;
+    transition:transform .4s ease;
+  }
+  .service-row .title{
+    font-family:var(--serif);
+    font-size:clamp(1.5rem, 3.4vw, 2.5rem);
+    font-weight:400;
+    letter-spacing:0.01em;
+    transition:transform .45s cubic-bezier(.22,1,.36,1), color .35s ease;
+    transform-origin:left center;
+  }
+  .service-row .desc{
+    grid-column:2 / 3;
+    max-width:520px;
+    font-size:0.88rem;
+    color:#a6a49f;
+    line-height:1.7;
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    transition:max-height .5s ease, opacity .4s ease, margin .4s ease;
+  }
+  .service-row .arrow{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:0.95rem;
+    color:var(--gold-hi);
+    opacity:0;
+    transform:translateX(-8px);
+    transition:opacity .35s ease, transform .35s ease;
+  }
+  .service-row:hover .title, .service-row.active .title{
+    color:var(--gold-hi);
+    transform:translateX(14px) scale(1.03);
+  }
+  .service-row:hover .num, .service-row.active .num{transform:translateY(-3px);}
+  .service-row:hover .arrow, .service-row.active .arrow{opacity:1; transform:translateX(0);}
+  .service-row.active .desc{max-height:80px; opacity:1; margin-top:14px;}
+
+  .service-visual{
+    position:fixed;
+    top:50%; right:6vw;
+    transform:translateY(-50%);
+    width:280px; height:360px;
+    border:1px solid var(--line-dark);
+    pointer-events:none;
+    opacity:0;
+    transition:opacity .5s ease;
+    z-index:5;
+    overflow:hidden;
+  }
+  .service-visual.show{opacity:1;}
+  .service-visual .panel{
+    position:absolute; inset:0;
+    background:linear-gradient(160deg, #2b2a27, #151515 60%, #1c1a16);
+    display:flex; align-items:flex-end; padding:22px;
+  }
+  .service-visual .panel::before{
+    content:'';
+    position:absolute; inset:0;
+    background:radial-gradient(120% 90% at 20% 0%, rgba(197,173,112,0.22), transparent 60%);
+  }
+  .service-visual .panel span{
+    font-family:var(--serif); font-style:italic; font-size:0.85rem; color:var(--gold-hi);
+    position:relative; z-index:1;
+  }
+  @media(max-width:1100px){ .service-visual{display:none;} }
+  @media(max-width:640px){
+    .service-row{grid-template-columns:40px 1fr auto; padding:26px 0;}
+  }
+
+  /* ================= SHOWCASE ================= */
+  .showcase{background:var(--silver);}
+  .show-block{
+    display:grid; grid-template-columns:1fr 1fr; min-height:88vh;
+    position:relative;
+  }
+  .show-block.rev{grid-template-columns:1fr 1fr;}
+  .show-block.rev .show-media{order:2;}
+  .show-block.rev .show-copy{order:1;}
+  .show-media{
+    position:relative; overflow:hidden;
+    background:linear-gradient(150deg,#e7e5e0,#c9c7c1 45%,#211f1c);
+    min-height:340px;
+  }
+  .show-media svg{position:absolute; bottom:-4%; left:50%; transform:translateX(-50%); width:78%; opacity:0.92;}
+  .show-media.dark{background:linear-gradient(150deg,#252320,#151515 55%,#0d0c0b);}
+  .show-copy{
+    display:flex; flex-direction:column; justify-content:center;
+    padding:8vw 6vw;
+  }
+  .show-index{font-family:var(--sans); font-size:0.72rem; letter-spacing:0.2em; color:var(--slate); margin-bottom:26px;}
+  .show-copy h3{
+    font-family:var(--serif); font-weight:400;
+    font-size:clamp(2rem, 4.4vw, 3.6rem); line-height:1.06;
+  }
+  .show-copy h3 em{font-style:italic; color:var(--gold);}
+  .show-copy p{margin-top:22px; max-width:380px; color:var(--slate); font-size:0.95rem; line-height:1.7;}
+
+  @media(max-width:860px){
+    .show-block, .show-block.rev{grid-template-columns:1fr;}
+    .show-block.rev .show-media, .show-block.rev .show-copy{order:initial;}
+    .show-media{min-height:52vh;}
+    .show-copy{padding:52px 7vw;}
+  }
+
+  /* ================= TESTIMONIAL ================= */
+  .testimonial{
+    background:var(--platinum);
+    padding:180px 0;
+    text-align:center;
+  }
+  .testimonial .meta-line{display:block; margin-bottom:44px;}
+  .testimonial blockquote{
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:400;
+    font-size:clamp(1.5rem, 3.4vw, 2.6rem);
+    line-height:1.4;
+    max-width:900px;
+    margin:0 auto;
+    color:var(--ink);
+  }
+  .testimonial .gold-rule{margin:44px auto 0;}
+  .testimonial cite{
+    display:block; margin-top:26px;
+    font-style:normal; font-size:0.78rem; letter-spacing:0.14em;
+    color:var(--slate); font-weight:600;
+  }
+
+  /* ================= ABOUT ================= */
+  .about{background:var(--charcoal); color:#EDEBE6; padding:150px 0;}
+  .about-grid{
+    display:grid; grid-template-columns:0.9fr 1.1fr; gap:80px; align-items:start;
+  }
+  .about h2{
+    font-family:var(--serif); font-weight:400;
+    font-size:clamp(2rem, 4.4vw, 3.3rem); line-height:1.12;
+    position:sticky; top:140px;
+  }
+  .about h2 em{font-style:italic; color:var(--gold-hi);}
+  .about-body p{
+    font-size:1.02rem; line-height:1.85; color:#b9b7b1; max-width:560px;
+  }
+  .about-body p + p{margin-top:20px;}
+  .about-words{
+    margin-top:64px; display:flex; gap:0;
+    border-top:1px solid var(--line-dark);
+  }
+  .about-word{
+    flex:1; padding:26px 0 0; border-right:1px solid var(--line-dark);
+  }
+  .about-word:last-child{border-right:none;}
+  .about-word .wnum{font-size:0.7rem; color:var(--gold-hi); letter-spacing:0.14em;}
+  .about-word .wtitle{
+    font-family:var(--serif); font-size:1.25rem; margin-top:10px; font-style:italic;
+  }
+  @media(max-width:900px){
+    .about-grid{grid-template-columns:1fr; gap:40px;}
+    .about h2{position:static;}
+    .about-words{flex-direction:column;}
+    .about-word{border-right:none; border-bottom:1px solid var(--line-dark); padding-bottom:20px;}
+  }
+
+  /* ================= CONTACT ================= */
+  .contact{background:var(--platinum); padding:150px 0;}
+  .contact-head h2{
+    font-family:var(--serif); font-weight:400;
+    font-size:clamp(2.2rem, 5.4vw, 4.4rem); line-height:1.02; max-width:640px;
+  }
+  .contact-body{
+    margin-top:70px;
+    display:grid; grid-template-columns:1fr 1fr; gap:0;
+    border-top:1px solid var(--line);
+  }
+  .contact-info{padding-right:60px;}
+  .info-row{
+    display:grid; grid-template-columns:140px 1fr;
+    gap:20px; padding:28px 0; border-bottom:1px solid var(--line);
+  }
+  .info-row .label{font-size:0.72rem; letter-spacing:0.16em; color:var(--slate); font-weight:600; padding-top:3px;}
+  .info-row .value{font-size:1.15rem; font-weight:500;}
+  .info-row .value.link:hover{color:var(--gold);}
+  .info-row .value.placeholder{color:var(--slate); font-style:italic; font-size:0.95rem; font-weight:400;}
+  .contact-map{
+    position:relative; min-height:340px; border-left:1px solid var(--line);
+  }
+  .contact-map iframe{width:100%; height:100%; min-height:340px; border:0; filter:grayscale(0.35) contrast(1.05);}
+  @media(max-width:860px){
+    .contact-body{grid-template-columns:1fr;}
+    .contact-info{padding-right:0;}
+    .contact-map{border-left:none; border-top:1px solid var(--line); min-height:280px;}
+    .contact-map iframe{min-height:280px;}
+  }
+
+  /* ================= BOOKING CTA ================= */
+  .booking{
+    position:relative;
+    background:linear-gradient(150deg,#1c1a17,#151515 55%,#0c0b0a);
+    color:#F1F0ED;
+    padding:190px 0;
+    text-align:center;
+    overflow:hidden;
+  }
+  .booking-car{
+    position:absolute; left:50%; bottom:-6%; transform:translateX(-50%);
+    width:min(1100px, 130vw); opacity:0.18; z-index:0;
+  }
+  .booking-inner{position:relative; z-index:1;}
+  .booking h2{
+    font-family:var(--serif); font-weight:400;
+    font-size:clamp(2.2rem, 5.6vw, 4.6rem); line-height:1.06;
+  }
+  .booking h2 span{display:block;}
+  .booking .brand{
+    margin-top:22px; font-family:var(--serif); font-style:italic; font-weight:500;
+    font-size:clamp(1.4rem, 3vw, 2rem); color:var(--gold-hi);
+  }
+  .booking p{margin-top:26px; color:#b9b7b1; font-size:1rem;}
+  .booking-ctas{margin-top:52px; display:flex; align-items:center; justify-content:center; gap:34px; flex-wrap:wrap;}
+  .btn-gold{
+    padding:17px 36px; background:var(--gold); color:var(--charcoal);
+    font-size:0.76rem; letter-spacing:0.14em; font-weight:600;
+    transition:background .35s ease;
+  }
+  .btn-gold:hover{background:var(--gold-hi);}
+  .btn-outline{
+    padding:16px 34px; border:1px solid rgba(241,240,237,0.35); color:#F1F0ED;
+    font-size:0.76rem; letter-spacing:0.14em; font-weight:600;
+    transition:border-color .35s ease, color .35s ease;
+  }
+  .btn-outline:hover{border-color:var(--gold-hi); color:var(--gold-hi);}
+
+  /* ================= FOOTER ================= */
+  footer{background:var(--ink); color:#c9c7c2; padding:80px 0 30px;}
+  .foot-top{
+    display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:50px;
+    padding-bottom:60px; border-bottom:1px solid var(--line-dark);
+  }
+  .foot-brand{font-family:var(--serif); font-size:1.5rem; color:#F1F0ED;}
+  .foot-brand .tag{
+    display:block; margin-top:14px; font-family:var(--sans);
+    font-size:0.72rem; letter-spacing:0.16em; color:var(--gold-hi); font-weight:600;
+  }
+  .foot-col h4{font-size:0.7rem; letter-spacing:0.16em; color:#79776f; font-weight:600; margin-bottom:20px;}
+  .foot-col ul{list-style:none; display:flex; flex-direction:column; gap:13px;}
+  .foot-col a:hover{color:#F1F0ED;}
+  .foot-col p{font-size:0.92rem; line-height:1.7;}
+  .foot-bottom{
+    display:flex; justify-content:space-between; align-items:center;
+    padding-top:26px; font-size:0.72rem; color:#6a6862; flex-wrap:wrap; gap:12px;
+  }
+  @media(max-width:760px){
+    .foot-top{grid-template-columns:1fr; gap:36px;}
+  }
+
+  section{scroll-margin-top:80px;}
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<nav class="nav" id="siteNav">
+  <a href="#hero" class="nav-logo">GOLDEN RIDE<small>PPF · TINT · POLISHING</small></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#showcase">Showcase</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Book Now</a>
+  <button class="nav-burger" id="navBurger" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="gold-rule"></span>
+      <span class="meta-line">GOLDEN RIDE STUDIO</span>
+    </div>
+    <h1 class="hero-title">The art of<br><em>automotive</em> perfection.</h1>
+    <p class="hero-sub">Premium automotive protection and enhancement, crafted for exceptional vehicles in Dubai.</p>
+    <div class="hero-services">
+      PPF <span class="sep">·</span> CERAMIC <span class="sep">·</span> POLISHING <span class="sep">·</span> DETAILING <span class="sep">·</span> TINT <span class="sep">·</span> DECALS
+    </div>
+    <div class="hero-location">UMM RAMOOL · DUBAI, UAE</div>
+    <div class="hero-ctas">
+      <a href="#services" class="btn-primary">Explore Services</a>
+      <a href="#contact" class="btn-text">Book Your Vehicle</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-frame-label">
+      <span class="meta-line">GOLDEN RIDE / 01</span>
+    </div>
+    <div class="hero-car">
+      <svg viewBox="0 0 640 260" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M18 190 C 18 150, 70 138, 118 132 L 168 96 C 196 76, 230 64, 268 62 L 392 60 C 430 60, 462 70, 490 90 L 540 128 C 580 132, 612 148, 618 176 L 618 192 L 574 192 C 574 168, 556 150, 532 150 C 508 150, 490 168, 490 192 L 210 192 C 210 168, 192 150, 168 150 C 144 150, 126 168, 126 192 L 18 192 Z" stroke="#151515" stroke-width="1.4" fill="rgba(21,21,21,0.05)"/>
+        <path d="M198 100 L 250 68 C 274 56, 300 50, 328 50 L 380 50 C 412 50, 440 60, 462 78 L 486 100 Z" stroke="#151515" stroke-width="1.2" fill="none"/>
+        <line x1="290" y1="63" x2="284" y2="100" stroke="#B59655" stroke-width="1.1"/>
+        <circle cx="168" cy="192" r="34" stroke="#151515" stroke-width="1.4" fill="none"/>
+        <circle cx="168" cy="192" r="15" stroke="#B59655" stroke-width="1.1" fill="none"/>
+        <circle cx="532" cy="192" r="34" stroke="#151515" stroke-width="1.4" fill="none"/>
+        <circle cx="532" cy="192" r="15" stroke="#B59655" stroke-width="1.1" fill="none"/>
+        <line x1="18" y1="192" x2="618" y2="192" stroke="#151515" stroke-width="1" opacity="0.35"/>
+      </svg>
+    </div>
+    <div class="hero-scroll">
+      <div class="stem"></div>
+      <span>SCROLL</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FEATURED SERVICES ================= -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="services-head reveal">
+      <h2>Six disciplines. One standard of finish.</h2>
+      <p>Every treatment is carried out as its own craft — considered, deliberate, and specific to your vehicle.</p>
+    </div>
+
+    <div class="service-list" id="serviceList">
+      <div class="service-row" data-desc="A transparent, self-healing film that shields your paintwork from stone chips, road debris and abrasion — invisible protection, permanent peace of mind.">
+        <span class="num">01</span>
+        <span class="title">Paint Protection Film</span>
+        <span class="arrow">View →</span>
+        <div class="desc"></div>
+      </div>
+      <div class="service-row" data-desc="A durable ceramic layer bonded to the surface for lasting gloss, hydrophobic beading and resistance to UV, chemicals and light scratching.">
+        <span class="num">02</span>
+        <span class="title">Ceramic Coating</span>
+        <span class="arrow">View →</span>
+        <div class="desc"></div>
+      </div>
+      <div class="service-row" data-desc="Machine correction that removes swirl marks and oxidation, restoring depth and clarity to the paint before any protective layer is applied.">
+        <span class="num">03</span>
+        <span class="title">Polishing</span>
+        <span class="arrow">View →</span>
+        <div class="desc"></div>
+      </div>
+      <div class="service-row" data-desc="A meticulous interior and exterior refinement — every surface, seam and panel attended to with the same level of care.">
+        <span class="num">04</span>
+        <span class="title">Detailing</span>
+        <span class="arrow">View →</span>
+        <div class="desc"></div>
+      </div>
+      <div class="service-row" data-desc="Precision window film for heat rejection, UV protection and privacy, fitted cleanly to every contour of the glass.">
+        <span class="num">05</span>
+        <span class="title">Tinting</span>
+        <span class="arrow">View →</span>
+        <div class="desc"></div>
+      </div>
+      <div class="service-row" data-desc="Custom decal work for personalisation, branding or subtle accenting — applied with clean, factory-level precision.">
+        <span class="num">06</span>
+        <span class="title">Decal Stickers</span>
+        <span class="arrow">View →</span>
+        <div class="desc"></div>
+      </div>
+    </div>
+  </div>
+  <div class="service-visual" id="serviceVisual">
+    <div class="panel"><span id="serviceVisualLabel">01 — PPF</span></div>
+  </div>
+</section>
+
+<!-- ================= SHOWCASE ================= -->
+<section class="showcase" id="showcase">
+
+  <div class="show-block">
+    <div class="show-media">
+      <svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M18 190 C 18 150, 70 138, 118 132 L 168 96 C 196 76, 230 64, 268 62 L 392 60 C 430 60, 462 70, 490 90 L 540 128 C 580 132, 612 148, 618 176 L 618 192 L 574 192 C 574 168, 556 150, 532 150 C 508 150, 490 168, 490 192 L 210 192 C 210 168, 192 150, 168 150 C 144 150, 126 168, 126 192 L 18 192 Z" stroke="#F1F0ED" stroke-width="1.2" fill="rgba(241,240,237,0.05)"/>
+        <circle cx="168" cy="192" r="34" stroke="#F1F0ED" stroke-width="1.2" fill="none"/>
+        <circle cx="532" cy="192" r="34" stroke="#F1F0ED" stroke-width="1.2" fill="none"/>
+      </svg>
+    </div>
+    <div class="show-copy reveal">
+      <span class="show-index">GOLDEN RIDE / 01</span>
+      <h3>Protection<br>you can <em>see</em>.</h3>
+      <p>Film applied with millimetre precision, so the edges disappear and only the shine remains.</p>
+    </div>
+  </div>
+
+  <div class="show-block rev">
+    <div class="show-media dark">
+      <svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M198 100 L 250 68 C 274 56, 300 50, 328 50 L 380 50 C 412 50, 440 60, 462 78 L 486 100 Z" stroke="#B59655" stroke-width="1.3" fill="rgba(181,150,85,0.06)"/>
+        <line x1="60" y1="130" x2="580" y2="130" stroke="#B59655" stroke-width="0.8" opacity="0.5"/>
+        <line x1="60" y1="150" x2="580" y2="150" stroke="#F1F0ED" stroke-width="0.6" opacity="0.25"/>
+      </svg>
+    </div>
+    <div class="show-copy reveal">
+      <span class="show-index">GOLDEN RIDE / 02</span>
+      <h3>Finish<br>you can <em>feel</em>.</h3>
+      <p>A ceramic layer that holds its gloss and its beading, wash after wash, season after season.</p>
+    </div>
+  </div>
+
+  <div class="show-block">
+    <div class="show-media">
+      <svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="320" cy="130" r="70" stroke="#151515" stroke-width="1.2" fill="none"/>
+        <circle cx="320" cy="130" r="34" stroke="#B59655" stroke-width="1.1" fill="none"/>
+        <line x1="320" y1="20" x2="320" y2="60" stroke="#151515" stroke-width="1"/>
+        <line x1="320" y1="200" x2="320" y2="240" stroke="#151515" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="show-copy reveal">
+      <span class="show-index">GOLDEN RIDE / 03</span>
+      <h3>Detail in<br><em>every</em> line.</h3>
+      <p>From the first wheel to the last panel — nothing rushed, nothing overlooked.</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ================= TESTIMONIAL ================= -->
+<section class="testimonial">
+  <div class="wrap reveal">
+    <span class="meta-line">CLIENT TESTIMONIAL</span>
+    <blockquote>"[Placeholder — a real client testimonial will appear here once provided.]"</blockquote>
+    <span class="gold-rule"></span>
+    <cite>— CLIENT NAME (PLACEHOLDER)</cite>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <h2 class="reveal">Built for vehicles<br>that deserve <em>more</em>.</h2>
+    <div class="about-body reveal d1">
+      <p>Golden Ride is an automotive protection and enhancement studio based in Umm Ramool, Dubai. We work across paint protection, surface enhancement, finish refinement, detailing, tinting and vehicle personalisation.</p>
+      <p>Every vehicle that comes through the studio is treated as its own project — assessed, prepared and finished with the same attention, whatever the make or model.</p>
+      <div class="about-words">
+        <div class="about-word"><span class="wnum">01</span><div class="wtitle">Precision</div></div>
+        <div class="about-word"><span class="wnum">02</span><div class="wtitle">Craft</div></div>
+        <div class="about-word"><span class="wnum">03</span><div class="wtitle">Protection</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="contact-head reveal">
+      <span class="meta-line">CONTACT</span>
+      <h2 style="margin-top:22px;">Visit<br>Golden Ride.</h2>
+    </div>
+    <div class="contact-body reveal d1">
+      <div class="contact-info">
+        <div class="info-row">
+          <span class="label">LOCATION</span>
+          <span class="value">Umm Ramool, Dubai, UAE</span>
+        </div>
+        <div class="info-row">
+          <span class="label">PHONE</span>
+          <a class="value link" href="tel:+971551411012">+971 55 141 1012</a>
+        </div>
+        <div class="info-row">
+          <span class="label">EMAIL</span>
+          <span class="value placeholder">Email address to be provided</span>
+        </div>
+        <div class="info-row">
+          <span class="label">HOURS</span>
+          <span class="value placeholder">Opening hours to be provided</span>
+        </div>
+      </div>
+      <div class="contact-map">
+        <iframe title="Golden Ride location — Umm Ramool, Dubai" src="https://www.google.com/maps?q=Umm+Ramool,+Dubai,+United+Arab+Emirates&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BOOKING CTA ================= -->
+<section class="booking">
+  <div class="booking-car">
+    <svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M18 190 C 18 150, 70 138, 118 132 L 168 96 C 196 76, 230 64, 268 62 L 392 60 C 430 60, 462 70, 490 90 L 540 128 C 580 132, 612 148, 618 176 L 618 192 L 574 192 C 574 168, 556 150, 532 150 C 508 150, 490 168, 490 192 L 210 192 C 210 168, 192 150, 168 150 C 144 150, 126 168, 126 192 L 18 192 Z" stroke="#C9AD70" stroke-width="1" fill="none"/>
+      <circle cx="168" cy="192" r="34" stroke="#C9AD70" stroke-width="1" fill="none"/>
+      <circle cx="532" cy="192" r="34" stroke="#C9AD70" stroke-width="1" fill="none"/>
+    </svg>
+  </div>
+  <div class="wrap booking-inner reveal">
+    <h2><span>Your vehicle.</span><span>Your standard.</span></h2>
+    <div class="brand">Golden Ride</div>
+    <p>Premium protection and enhancement, crafted in Dubai.</p>
+    <div class="booking-ctas">
+      <a href="#contact" class="btn-gold">Book Your Vehicle</a>
+      <a href="tel:+971551411012" class="btn-outline">Call +971 55 141 1012</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <div class="foot-brand">Golden Ride<span class="tag">PPF · TINT · POLISHING</span></div>
+        <p style="margin-top:24px; max-width:280px; font-size:0.85rem; color:#8b8983;">Automotive protection and enhancement, crafted for exceptional vehicles.</p>
+      </div>
+      <div class="foot-col">
+        <h4>NAVIGATE</h4>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#showcase">Showcase</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>CONTACT</h4>
+        <p>Umm Ramool, Dubai, UAE</p>
+        <p style="margin-top:10px;"><a href="tel:+971551411012">+971 55 141 1012</a></p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> Golden Ride. All rights reserved.</span>
+      <span>PPF · CERAMIC · POLISHING · DETAILING · TINT · DECALS</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Nav scroll state
+  const nav = document.getElementById('siteNav');
+  const onScroll = () => {
+    if (window.scrollY > 60) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Mobile menu
+  const burger = document.getElementById('navBurger');
+  const links = document.getElementById('navLinks');
+  burger.addEventListener('click', () => {
+    const isOpen = links.classList.toggle('open');
+    burger.classList.toggle('open', isOpen);
+    burger.setAttribute('aria-expanded', isOpen);
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open');
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.18 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Services interaction
+  const rows = document.querySelectorAll('.service-row');
+  const visual = document.getElementById('serviceVisual');
+  const visualLabel = document.getElementById('serviceVisualLabel');
+  let activeRow = null;
+
+  function setActive(row){
+    if (activeRow) {
+      activeRow.classList.remove('active');
+      activeRow.querySelector('.desc').textContent = '';
+    }
+    if (activeRow === row) { activeRow = null; return; }
+    row.classList.add('active');
+    row.querySelector('.desc').textContent = row.dataset.desc;
+    activeRow = row;
+  }
+
+  rows.forEach(row => {
+    row.addEventListener('click', () => setActive(row));
+    row.addEventListener('mouseenter', () => {
+      const num = row.querySelector('.num').textContent;
+      const title = row.querySelector('.title').textContent;
+      visualLabel.textContent = num + ' — ' + title;
+      visual.classList.add('show');
+    });
+  });
+  document.getElementById('serviceList').addEventListener('mouseleave', () => visual.classList.remove('show'));
+</script>
+
+</body>
+</html>
