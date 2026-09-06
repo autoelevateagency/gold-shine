@@ -111,11 +111,11 @@ export const Testimonial = (): React.ReactElement => {
   return (
     <section className="testimonial" aria-label={t.testimonial.label}>
       <div className="wrap">
-        <Reveal>
+        <Reveal variant="fade">
           <span className="meta-line">{t.testimonial.label}</span>
         </Reveal>
 
-        <Reveal delay="d1">
+        <Reveal delay="d1" variant="blur">
           <div
             className="testimonial-carousel"
             dir={dir}
@@ -142,7 +142,7 @@ export const Testimonial = (): React.ReactElement => {
                     aria-hidden={!isActive}
                   >
                     <blockquote>{item.quote}</blockquote>
-                    <span className="gold-rule" />
+                    <span className="gold-rule reveal-rule" />
                     <cite>{item.cite}</cite>
                   </figure>
                 );

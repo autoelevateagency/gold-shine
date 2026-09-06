@@ -1,5 +1,6 @@
 "use client";
 
+import { Reveal } from "@/components/Reveal";
 import { useLocale } from "@/context/LocaleContext";
 
 export const Footer = (): React.ReactElement => {
@@ -18,7 +19,7 @@ export const Footer = (): React.ReactElement => {
     <footer>
       <div className="wrap">
         <div className="foot-top">
-          <div>
+          <Reveal variant="up">
             <div className="foot-brand">
               {t.footer.brand}
               <span className="tag">{t.footer.tagline}</span>
@@ -33,8 +34,8 @@ export const Footer = (): React.ReactElement => {
             >
               {t.footer.blurb}
             </p>
-          </div>
-          <div className="foot-col">
+          </Reveal>
+          <Reveal className="foot-col" variant="up" delay="d1">
             <h4>{t.footer.navigate}</h4>
             <ul>
               {links.map((link) => (
@@ -43,21 +44,21 @@ export const Footer = (): React.ReactElement => {
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="foot-col">
+          </Reveal>
+          <Reveal className="foot-col" variant="up" delay="d2">
             <h4>{t.footer.contact}</h4>
             <p>{t.footer.location}</p>
             <p style={{ marginTop: 10 }}>
               <a href={t.footer.phoneHref}>{t.footer.phone}</a>
             </p>
-          </div>
+          </Reveal>
         </div>
-        <div className="foot-bottom">
+        <Reveal className="foot-bottom" variant="fade" delay="d3">
           <span>
             © {year} {t.footer.copyright}
           </span>
           <span>{t.footer.servicesLine}</span>
-        </div>
+        </Reveal>
       </div>
     </footer>
   );

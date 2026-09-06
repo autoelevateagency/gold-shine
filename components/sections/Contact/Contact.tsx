@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { Reveal } from "@/components/Reveal";
+import { Reveal, type RevealDelay } from "@/components/Reveal";
 import { useLocale } from "@/context/LocaleContext";
 import { STUDIO_LOCATION } from "@/data/location";
 
@@ -16,13 +16,57 @@ const ContactMap = dynamic(
   },
 );
 
+const INFO_DELAYS: RevealDelay[] = ["d1", "d2", "d3", "d4"];
+
 export const Contact = (): React.ReactElement => {
   const { t } = useLocale();
+
+  const infoRows = [
+    {
+      label: t.contact.locationLabel,
+      content: (
+        <a
+          className="value link"
+          href={STUDIO_LOCATION.googleMapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {t.contact.locationValue}
+        </a>
+      ),
+    },
+    {
+      label: t.contact.phoneLabel,
+      content: (
+        <a className="value link" href={t.contact.phoneHref}>
+          {t.contact.phoneValue}
+        </a>
+      ),
+    },
+    {
+      label: t.contact.emailLabel,
+      content: (
+        <a className="value link" href={t.contact.emailHref}>
+          {t.contact.emailValue}
+        </a>
+      ),
+    },
+    {
+      label: t.contact.hoursLabel,
+      content: (
+        <ul className="value hours-list">
+          {t.contact.hoursLines.map((line) => (
+            <li key={line}>{line}</li>
+          ))}
+        </ul>
+      ),
+    },
+  ];
 
   return (
     <section className="contact" id="contact">
       <div className="wrap">
-        <Reveal className="contact-head">
+        <Reveal className="contact-head" variant="up">
           <span className="meta-line">{t.contact.label}</span>
           <h2>
             {t.contact.headingLine1}
@@ -30,48 +74,28 @@ export const Contact = (): React.ReactElement => {
             {t.contact.headingLine2}
           </h2>
         </Reveal>
-        <Reveal className="contact-body" delay="d1">
+        <div className="contact-body">
           <div className="contact-info">
-            <div className="info-row">
-              <span className="label">{t.contact.locationLabel}</span>
-              <a
-                className="value link"
-                href={STUDIO_LOCATION.googleMapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+            {infoRows.map((row, index) => (
+              <Reveal
+                key={row.label}
+                className="info-row"
+                variant="up"
+                delay={INFO_DELAYS[index]}
               >
-                {t.contact.locationValue}
-              </a>
-            </div>
-            <div className="info-row">
-              <span className="label">{t.contact.phoneLabel}</span>
-              <a className="value link" href={t.contact.phoneHref}>
-                {t.contact.phoneValue}
-              </a>
-            </div>
-            <div className="info-row">
-              <span className="label">{t.contact.emailLabel}</span>
-              <a className="value link" href={t.contact.emailHref}>
-                {t.contact.emailValue}
-              </a>
-            </div>
-            <div className="info-row">
-              <span className="label">{t.contact.hoursLabel}</span>
-              <ul className="value hours-list">
-                {t.contact.hoursLines.map((line) => (
-                  <li key={line}>{line}</li>
-                ))}
-              </ul>
-            </div>
+                <span className="label">{row.label}</span>
+                {row.content}
+              </Reveal>
+            ))}
           </div>
-          <div className="contact-map">
+          <Reveal className="contact-map" variant="clip" delay="d2">
             <ContactMap
               title={t.contact.mapTitle}
               brand={t.footer.brand}
               directionsLabel={t.contact.mapDirections}
             />
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

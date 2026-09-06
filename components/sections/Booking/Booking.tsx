@@ -16,22 +16,26 @@ export const Booking = (): React.ReactElement => {
           label="Golden Ride craftsmanship"
         />
       </div>
-      <Reveal className="wrap booking-inner">
-        <h2>
+      <div className="wrap booking-inner">
+        <Reveal variant="scale" as="h2">
           <span>{t.booking.line1}</span>
           <span>{t.booking.line2}</span>
-        </h2>
-        <div className="brand">{t.booking.brand}</div>
-        <p>{t.booking.sub}</p>
-        <div className="booking-ctas">
+        </Reveal>
+        <Reveal className="brand" variant="fade" delay="d1">
+          {t.booking.brand}
+        </Reveal>
+        <Reveal variant="up" delay="d2" as="p">
+          {t.booking.sub}
+        </Reveal>
+        <Reveal className="booking-ctas" variant="up" delay="d3">
           <a href="#contact" className="btn-gold">
             {t.booking.book}
           </a>
           <a href={t.contact.phoneHref} className="btn-outline">
             {t.booking.call}
           </a>
-        </div>
-      </Reveal>
+        </Reveal>
+      </div>
     </section>
   );
 };

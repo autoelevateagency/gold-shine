@@ -1,21 +1,58 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocale } from "@/context/LocaleContext";
 
 const MOBILE_MAX = 900;
+const TOP_SHOW_OFFSET = 72;
+const SCROLL_DELTA = 8;
 
 export const Nav = (): React.ReactElement => {
   const { t } = useLocale();
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const scrollYRef = useRef(0);
+  const lastScrollYRef = useRef(0);
+  const menuOpenRef = useRef(false);
+  const tickingRef = useRef(false);
 
   useEffect(() => {
-    const onScroll = (): void => {
-      setScrolled(window.scrollY > 60);
+    menuOpenRef.current = menuOpen;
+    if (menuOpen) {
+      setHidden(false);
+    }
+  }, [menuOpen]);
+
+  useEffect(() => {
+    lastScrollYRef.current = window.scrollY;
+
+    const updateNav = (): void => {
+      const current = window.scrollY;
+      const delta = current - lastScrollYRef.current;
+
+      setScrolled(current > 40);
+
+      if (menuOpenRef.current || current <= TOP_SHOW_OFFSET) {
+        setHidden(false);
+      } else if (delta > SCROLL_DELTA) {
+        setHidden(true);
+      } else if (delta < -SCROLL_DELTA) {
+        setHidden(false);
+      }
+
+      lastScrollYRef.current = current;
+      tickingRef.current = false;
     };
+
+    const onScroll = (): void => {
+      if (tickingRef.current) return;
+      tickingRef.current = true;
+      window.requestAnimationFrame(updateNav);
+    };
+
     document.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
+    updateNav();
     return () => document.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -30,8 +67,18 @@ export const Nav = (): React.ReactElement => {
   }, []);
 
   useEffect(() => {
-    document.body.classList.toggle("menu-open", menuOpen);
-    return () => document.body.classList.remove("menu-open");
+    if (!menuOpen) return;
+
+    const y = window.scrollY;
+    scrollYRef.current = y;
+    document.body.classList.add("menu-open");
+    document.body.style.top = `-${y}px`;
+
+    return () => {
+      document.body.classList.remove("menu-open");
+      document.body.style.top = "";
+      window.scrollTo(0, scrollYRef.current);
+    };
   }, [menuOpen]);
 
   useEffect(() => {
@@ -63,6 +110,15 @@ export const Nav = (): React.ReactElement => {
     { href: "#contact", label: t.nav.contact },
   ];
 
+  const navClassName = [
+    "nav",
+    scrolled || menuOpen ? "scrolled" : "",
+    menuOpen ? "menu-active" : "",
+    hidden && !menuOpen ? "nav-hidden" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <>
       <div
@@ -75,6 +131,21 @@ export const Nav = (): React.ReactElement => {
         id="navPanel"
         aria-hidden={!menuOpen}
       >
+        <div className="nav-panel-bar">
+          <a href="#hero" className="nav-panel-brand" onClick={closeMenu}>
+            <span className="nav-brand-name">{t.nav.brand}</span>
+            <span className="nav-brand-services">{t.nav.tagline}</span>
+          </a>
+          <button
+            className="nav-panel-close"
+            type="button"
+            aria-label={t.nav.closeMenu}
+            onClick={closeMenu}
+          >
+            <span />
+            <span />
+          </button>
+        </div>
         <div className="nav-panel-inner">
           <div className="nav-menu-head">
             <span className="gold-rule" />
@@ -98,13 +169,10 @@ export const Nav = (): React.ReactElement => {
           <p className="nav-menu-tagline">{t.nav.tagline}</p>
         </div>
       </div>
-      <nav
-        className={`nav${scrolled || menuOpen ? " scrolled" : ""}${menuOpen ? " menu-active" : ""}`}
-        id="siteNav"
-      >
+      <nav className={navClassName} id="siteNav">
         <a href="#hero" className="nav-logo" onClick={closeMenu}>
-          {t.nav.brand}
-          <small>{t.nav.tagline}</small>
+          <span className="nav-brand-name">{t.nav.brand}</span>
+          <span className="nav-brand-services">{t.nav.tagline}</span>
         </a>
         <ul className="nav-links" id="navLinks">
           {links.map((link) => (
@@ -122,7 +190,7 @@ export const Nav = (): React.ReactElement => {
           className={`nav-burger${menuOpen ? " open" : ""}`}
           id="navBurger"
           type="button"
-          aria-label={t.nav.toggleMenu}
+          aria-label={menuOpen ? t.nav.closeMenu : t.nav.toggleMenu}
           aria-expanded={menuOpen}
           aria-controls="navPanel"
           onClick={toggleMenu}

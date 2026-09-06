@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Reveal } from "@/components/Reveal";
+import { Reveal, type RevealDelay } from "@/components/Reveal";
 import { VideoMedia } from "@/components/VideoMedia";
 import { useLocale } from "@/context/LocaleContext";
 import { SERVICE_VIDEOS, VIDEO_PATHS } from "@/data/videos";
+
+const ROW_DELAYS: RevealDelay[] = ["d1", "d2", "d3", "d4", "d5", "d6"];
 
 export const Services = (): React.ReactElement => {
   const { t } = useLocale();
@@ -28,7 +30,7 @@ export const Services = (): React.ReactElement => {
   return (
     <section className="services" id="services">
       <div className="wrap">
-        <Reveal className="services-head">
+        <Reveal className="services-head" variant="up">
           <h2>{t.services.heading}</h2>
           <p>{t.services.sub}</p>
         </Reveal>
@@ -41,9 +43,12 @@ export const Services = (): React.ReactElement => {
           {t.services.items.map((item, index) => {
             const isActive = activeIndex === index;
             return (
-              <div
+              <Reveal
                 key={item.num}
                 className={`service-row${isActive ? " active" : ""}`}
+                variant="up"
+                delay={ROW_DELAYS[index]}
+                threshold={0.08}
                 role="button"
                 tabIndex={0}
                 aria-expanded={isActive}
@@ -68,7 +73,7 @@ export const Services = (): React.ReactElement => {
                     />
                   </div>
                 ) : null}
-              </div>
+              </Reveal>
             );
           })}
         </div>

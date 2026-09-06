@@ -30,4 +30,4 @@ export const SERVICE_VIDEOS: VideoKey[] = [
   "bodyDecals",
 ];
 
-export const BOOKING_VIDEO: VideoKey = "emblemDecals";
+export const BOOKING_VIDEO: VideoKey = "hero";

@@ -16,6 +16,7 @@ export type Dictionary = {
     contact: string;
     bookNow: string;
     toggleMenu: string;
+    closeMenu: string;
   };
   hero: {
     eyebrow: string;
@@ -42,7 +43,8 @@ export type Dictionary = {
   };
   showcase: {
     label: string;
-    eyebrow: string;
+    range: string;
+    micro: string;
     items: Array<{
       num: string;
       label: string;
@@ -117,8 +119,8 @@ const en: Dictionary = {
       "Golden Ride is a premium automotive protection and enhancement studio in Umm Ramool, Dubai — PPF, ceramic coating, polishing, detailing, tinting and decals.",
   },
   nav: {
-    brand: "GOLDEN RIDE",
-    tagline: "PPF · TINT · POLISHING",
+    brand: "GOLD SHINE",
+    tagline: "PPF | Ceramic | wrapping | Tint | Polishing",
     menuLabel: "MENU",
     home: "Home",
     services: "Services",
@@ -127,6 +129,7 @@ const en: Dictionary = {
     contact: "Contact",
     bookNow: "Book Now",
     toggleMenu: "Toggle menu",
+    closeMenu: "Close menu",
   },
   hero: {
     eyebrow: "GOLDEN RIDE STUDIO",
@@ -180,7 +183,8 @@ const en: Dictionary = {
   },
   showcase: {
     label: "WORK",
-    eyebrow: "GOLDEN RIDE / WORK",
+    range: "01 — 06",
+    micro: "GOLDEN RIDE — WORK",
     items: [
       {
         num: "01",
@@ -301,8 +305,8 @@ const ur: Dictionary = {
       "گولڈن رائڈ ام رمول، دبئی میں ایک پریمیم آٹوموٹو پروٹیکشن اور اینہانسمنٹ اسٹوڈیو ہے — پی پی ایف، سیرامک کوٹنگ، پالش، ڈیٹیلنگ، ٹنٹ اور ڈیکالز۔",
   },
   nav: {
-    brand: "GOLDEN RIDE",
-    tagline: "PPF · TINT · POLISHING",
+    brand: "GOLD SHINE",
+    tagline: "PPF | Ceramic | wrapping | Tint | Polishing",
     menuLabel: "مینو",
     home: "ہوم",
     services: "سروسز",
@@ -311,6 +315,7 @@ const ur: Dictionary = {
     contact: "رابطہ",
     bookNow: "اب بک کریں",
     toggleMenu: "مینو کھولیں",
+    closeMenu: "مینو بند کریں",
   },
   hero: {
     eyebrow: "GOLDEN RIDE STUDIO",
@@ -364,7 +369,8 @@ const ur: Dictionary = {
   },
   showcase: {
     label: "کام",
-    eyebrow: "GOLDEN RIDE / کام",
+    range: "01 — 06",
+    micro: "GOLDEN RIDE — کام",
     items: [
       {
         num: "01",
