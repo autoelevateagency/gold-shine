@@ -1,24 +1,28 @@
 "use client";
 
-import { useState } from "react";
-import { Reveal, type RevealDelay } from "@/components/Reveal";
+import { useRef, useState } from "react";
+import { Reveal } from "@/components/Reveal";
 import { VideoMedia } from "@/components/VideoMedia";
 import { useLocale } from "@/context/LocaleContext";
 import { SERVICE_VIDEOS, VIDEO_PATHS } from "@/data/videos";
-
-const ROW_DELAYS: RevealDelay[] = ["d1", "d2", "d3", "d4", "d5", "d6"];
 
 export const Services = (): React.ReactElement => {
   const { t } = useLocale();
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [hoverIndex, setHoverIndex] = useState(0);
   const [visualShow, setVisualShow] = useState(false);
+  const lastToggleAtRef = useRef(0);
 
   const previewIndex = activeIndex ?? hoverIndex;
   const previewItem = t.services.items[previewIndex];
   const previewVideo = SERVICE_VIDEOS[previewIndex];
 
   const handleToggle = (index: number): void => {
+    const now = Date.now();
+    if (now - lastToggleAtRef.current < 280) {
+      return;
+    }
+    lastToggleAtRef.current = now;
     setActiveIndex((current) => (current === index ? null : index));
   };
 
@@ -43,12 +47,9 @@ export const Services = (): React.ReactElement => {
           {t.services.items.map((item, index) => {
             const isActive = activeIndex === index;
             return (
-              <Reveal
+              <div
                 key={item.num}
                 className={`service-row${isActive ? " active" : ""}`}
-                variant="up"
-                delay={ROW_DELAYS[index]}
-                threshold={0.08}
                 role="button"
                 tabIndex={0}
                 aria-expanded={isActive}
@@ -64,7 +65,7 @@ export const Services = (): React.ReactElement => {
                 <span className="num">{item.num}</span>
                 <span className="title">{item.title}</span>
                 <span className="arrow">{t.services.view}</span>
-                <div className="desc">{isActive ? item.desc : ""}</div>
+                <div className="desc">{isActive ? item.desc : null}</div>
                 {isActive ? (
                   <div className="service-row-media">
                     <VideoMedia
@@ -73,7 +74,7 @@ export const Services = (): React.ReactElement => {
                     />
                   </div>
                 ) : null}
-              </Reveal>
+              </div>
             );
           })}
         </div>
